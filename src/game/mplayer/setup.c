@@ -3480,6 +3480,40 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
 	},
+#ifndef PLATFORM_N64
+	{
+		MENUITEMTYPE_SELECTABLE,
+		8,
+		MENUITEMFLAG_LITERAL_TEXT,
+		(uintptr_t)"9:",
+		(uintptr_t)&mpMenuTextSimulantName,
+		menuhandlerMpSimulantSlot,
+	},
+	{
+		MENUITEMTYPE_SELECTABLE,
+		9,
+		MENUITEMFLAG_LITERAL_TEXT,
+		(uintptr_t)"10:",
+		(uintptr_t)&mpMenuTextSimulantName,
+		menuhandlerMpSimulantSlot,
+	},
+	{
+		MENUITEMTYPE_SELECTABLE,
+		10,
+		MENUITEMFLAG_LITERAL_TEXT,
+		(uintptr_t)"11:",
+		(uintptr_t)&mpMenuTextSimulantName,
+		menuhandlerMpSimulantSlot,
+	},
+	{
+		MENUITEMTYPE_SELECTABLE,
+		11,
+		MENUITEMFLAG_LITERAL_TEXT,
+		(uintptr_t)"12:",
+		(uintptr_t)&mpMenuTextSimulantName,
+		menuhandlerMpSimulantSlot,
+	},
+#endif
 	{
 		MENUITEMTYPE_SEPARATOR,
 		0,

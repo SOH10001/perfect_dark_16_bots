@@ -15,6 +15,7 @@
 
 #define MAX_ARTIFACTS          120
 #define MAX_BOTS               8
+#define MAX_BOT_CONFIGS        12
 #define MAX_RUNTIME_BOTS       16
 #define MAX_CHRSPERSQUADRON    16
 #define MAX_CHRSPERTEAM        32

@@ -37,8 +37,8 @@ struct chrdata *g_MpAllChrPtrs[MAX_MPCHRS];
 struct mpchrconfig *g_MpAllChrConfigPtrs[MAX_MPCHRS];
 s32 g_MpNumChrs;
 u32 var800ac534;
-struct mpbotconfig g_BotConfigsArray[MAX_BOTS];
-u8 g_MpSimulantDifficultiesPerNumPlayers[MAX_BOTS][MAX_PLAYERS];
+struct mpbotconfig g_BotConfigsArray[MAX_BOT_CONFIGS];
+u8 g_MpSimulantDifficultiesPerNumPlayers[MAX_BOT_CONFIGS][MAX_PLAYERS];
 struct mpplayerconfig g_PlayerConfigsArray[MAX_MPPLAYERCONFIGS];
 u8 g_AmBotCommands[9];
 struct mpsetup g_MpSetup;
@@ -3215,7 +3215,7 @@ s32 mpGetSlotForNewBot(void)
 {
 	s32 i = 0;
 
-	while (i < MAX_BOTS - 1 && g_MpSetup.chrslots & (1 << (i + 4))) {
+	while (i < MAX_BOT_CONFIGS - 1 && g_MpSetup.chrslots & (1 << (i + 4))) {
 		i++;
 	}
 
@@ -3256,7 +3256,7 @@ bool mpHasSimulants(void)
 
 bool mpHasUnusedBotSlots(void)
 {
-	s32 numvacant = challengeIsFeatureUnlocked(MPFEATURE_8BOTS) ? MAX_BOTS : 4;
+	s32 numvacant = challengeIsFeatureUnlocked(MPFEATURE_8BOTS) ? MAX_BOT_CONFIGS : 4;
 	s32 i;
 
 	for (i = 4; i < MAX_MPCHRS; i++) {
@@ -3274,11 +3274,11 @@ bool mpHasUnusedBotSlots(void)
 
 bool mpIsSimSlotEnabled(s32 slot)
 {
-	s32 numfree = MAX_BOTS;
+	s32 numfree = MAX_BOT_CONFIGS;
 	s32 i;
 
 	if ((g_MpSetup.chrslots & (1 << (slot + 4))) == 0) {
-		for (i = 0; i < MAX_BOTS; i++) {
+		for (i = 0; i < MAX_BOT_CONFIGS; i++) {
 			if (g_MpSetup.chrslots & (1 << (i + 4))) {
 				numfree--;
 			}
