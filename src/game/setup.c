@@ -2114,10 +2114,8 @@ void setupCreateProps(s32 stagenum)
 
 					if ((g_MpSetup.chrslots & (1 << (slotnum + 4)))
 							&& mpIsSimSlotEnabled(slotnum)) {
-						for (j = 0; j < 2; j++) {
-							botmgrAllocateBot(chrnum, slotnum);
-							chrnum++;
-						}
+						botmgrAllocateBot(chrnum, slotnum);
+						chrnum++;
 					}
 
 					slotsdone[slotnum] = true;
