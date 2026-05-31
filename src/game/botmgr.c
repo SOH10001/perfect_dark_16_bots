@@ -74,9 +74,6 @@ void botmgrAllocateBot(s32 chrnum, s32 aibotnum)
 			chr->flags = CHRFLAG0_CAN_EXAMINE_BODY; // reused flag?
 			chr->flags2 = 0;
 			chr->team = 1 << g_BotConfigsArray[aibotnum].base.team;
-			printf("MAXBOTS DEBUG bot spawn chrnum=%d aibotnum=%d configteam=%d runtimeteam=0x%x\\n",
-				chrnum, aibotnum, g_BotConfigsArray[aibotnum].base.team, chr->team);
-			fflush(stdout);
 			chr->squadron = 0;
 
 			if (g_BotCount < MAX_RUNTIME_BOTS) {

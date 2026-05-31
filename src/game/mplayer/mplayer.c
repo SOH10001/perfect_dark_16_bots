@@ -196,10 +196,6 @@ void mpStartMatch(void)
 	s32 numplayers = 0;
 	s32 stagenum;
 
-	printf("MAXBOTS DEBUG mpStartMatch entry options=0x%08x quickteam=%d adv=%d chrslots=0x%04x\\n",
-		g_MpSetup.options, g_Vars.mpquickteam, g_Vars.usingadvsetup, g_MpSetup.chrslots);
-	fflush(stdout);
-
 #ifndef PLATFORM_N64
 	if (g_MpSetup.options & MPOPTION_AUTORANDOMWEAPON_START) {
 		if (g_MpWeaponSetNum == WEAPONSET_RANDOM
@@ -246,9 +242,6 @@ void mpStartMatch(void)
 	titleSetNextStage(stagenum);
 	mainChangeToStage(stagenum);
 	setNumPlayers(numplayers);
-	printf("MAXBOTS DEBUG mpStartMatch exit options=0x%08x quickteam=%d adv=%d chrslots=0x%04x\\n",
-		g_MpSetup.options, g_Vars.mpquickteam, g_Vars.usingadvsetup, g_MpSetup.chrslots);
-	fflush(stdout);
 
 	titleSetNextMode(TITLEMODE_SKIP);
 
