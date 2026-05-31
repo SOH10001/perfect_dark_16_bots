@@ -4564,7 +4564,8 @@ void chrDamage(struct chrdata *chr, f32 damage, struct coord *vector, struct gse
 			}
 
 			if (g_Vars.normmplayerisrunning && (g_MpSetup.options & MPOPTION_ONEHITKILLS)) {
-				damage = 0;
+				// Mod: true one-hit kill should remove shield and let damage continue
+				// through to health/body damage in the same hit.
 				chrSetShield(chr, 0);
 			} else if (shield >= damage / armourscale) {
 				// Has enough shield to sustain the damage
@@ -4954,6 +4955,14 @@ void chrDamage(struct chrdata *chr, f32 damage, struct coord *vector, struct gse
 			// Don't enter this branch if there is no damage to give,
 			// or we are making a chr dizzy in solo mode (unless force is set)
 			if (damage > 0 && (g_Vars.normmplayerisrunning || !makedizzy || forceapplydamage)) {
+				// Mod: make multiplayer One Hit Kills truly lethal for bots, including
+				// shielded bots and low-damage weapons.
+				if (g_Vars.normmplayerisrunning
+						&& (g_MpSetup.options & MPOPTION_ONEHITKILLS)
+						&& chr->aibot) {
+					damage = chr->maxdamage;
+				}
+
 				f32 amount = damage;
 
 				if (chr->damage + damage > chr->maxdamage) {

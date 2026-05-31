@@ -196,6 +196,10 @@ void mpStartMatch(void)
 	s32 numplayers = 0;
 	s32 stagenum;
 
+	printf("MAXBOTS DEBUG mpStartMatch entry options=0x%08x quickteam=%d adv=%d chrslots=0x%04x\\n",
+		g_MpSetup.options, g_Vars.mpquickteam, g_Vars.usingadvsetup, g_MpSetup.chrslots);
+	fflush(stdout);
+
 #ifndef PLATFORM_N64
 	if (g_MpSetup.options & MPOPTION_AUTORANDOMWEAPON_START) {
 		if (g_MpWeaponSetNum == WEAPONSET_RANDOM
@@ -205,10 +209,22 @@ void mpStartMatch(void)
 	}
 #endif
 
-	mpConfigureQuickTeamSimulants();
+	// Mod: saved/custom setups already contain their selected simulants and teams.
+	// Avoid re-running Quick Team setup at match start, because it can clear
+	// MPOPTION_TEAMSENABLED and rebuild simulants from quick-team state.
+	if (g_Vars.mpquickteam != MPQUICKTEAM_NONE && g_Vars.usingadvsetup == false) {
+		mpConfigureQuickTeamSimulants();
+	}
 
-	if (!challengeIsFeatureUnlocked(MPFEATURE_ONEHITKILLS)) {
-		g_MpSetup.options &= ~MPOPTION_ONEHITKILLS;
+	// Mod: allow saved/custom presets to keep One Hit Kills even if the
+	// original unlock gate has not been satisfied.
+	// if (!challengeIsFeatureUnlocked(MPFEATURE_ONEHITKILLS)) {
+	// 	g_MpSetup.options &= ~MPOPTION_ONEHITKILLS;
+	// }
+
+	// Mod: if teams are enabled, always show team display in the match UI.
+	if (g_MpSetup.options & MPOPTION_TEAMSENABLED) {
+		g_MpSetup.options |= MPOPTION_DISPLAYTEAM;
 	}
 
 	if (!challengeIsFeatureUnlocked(MPFEATURE_SLOWMOTION)) {
@@ -230,6 +246,10 @@ void mpStartMatch(void)
 	titleSetNextStage(stagenum);
 	mainChangeToStage(stagenum);
 	setNumPlayers(numplayers);
+	printf("MAXBOTS DEBUG mpStartMatch exit options=0x%08x quickteam=%d adv=%d chrslots=0x%04x\\n",
+		g_MpSetup.options, g_Vars.mpquickteam, g_Vars.usingadvsetup, g_MpSetup.chrslots);
+	fflush(stdout);
+
 	titleSetNextMode(TITLEMODE_SKIP);
 
 	g_Vars.perfectbuddynum = 1;
@@ -537,7 +557,10 @@ void mpInit(bool resetplayers)
 
 	g_MpSetup.scenario = MPSCENARIO_COMBAT;
 	g_MpSetup.stagenum = STAGE_MP_SKEDAR;
-	g_MpSetup.options = MPOPTION_DISPLAYTEAM
+	// Mod: keep max-bot test rules available when multiplayer defaults are reapplied.
+	g_MpSetup.options = MPOPTION_ONEHITKILLS
+		| MPOPTION_TEAMSENABLED
+		| MPOPTION_DISPLAYTEAM
 		| MPOPTION_KILLSSCORE
 		| MPOPTION_HTB_HIGHLIGHTBRIEFCASE
 		| MPOPTION_HTB_SHOWONRADAR
@@ -3961,9 +3984,15 @@ void mpsetupfileLoadWad(struct savebuffer *buffer, u8 version)
 
 	if (version > 0) {
 		g_MpSetup.options = savebufferReadBits(buffer, 32);
+		if (g_MpSetup.options & MPOPTION_TEAMSENABLED) {
+			g_MpSetup.options |= MPOPTION_DISPLAYTEAM;
+		}
 	}
 	else {
 		g_MpSetup.options = savebufferReadBits(buffer, 21);
+		if (g_MpSetup.options & MPOPTION_TEAMSENABLED) {
+			g_MpSetup.options |= MPOPTION_DISPLAYTEAM;
+		}
 	}
 
 	g_MpSetup.chrslots &= 0x000f;

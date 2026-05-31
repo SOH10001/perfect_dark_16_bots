@@ -1525,9 +1525,9 @@ void setupCreateProps(s32 stagenum)
 
 			numchrs += setupCountCommandType(OBJTYPE_CHR);
 
-			if (g_Vars.normmplayerisrunning == false
-					&& g_MissionConfig.iscoop
-					&& g_Vars.numaibuddies > 0) {
+			if (g_Vars.normmplayerisrunning) {
+				numchrs += MAX_RUNTIME_BOTS;
+			} else if (g_MissionConfig.iscoop && g_Vars.numaibuddies > 0) {
 				numchrs += g_Vars.numaibuddies;
 			}
 
@@ -2089,6 +2089,7 @@ void setupCreateProps(s32 stagenum)
 			if (g_Vars.normmplayerisrunning && mpHasSimulants()) {
 				u32 stack[4];
 				s32 i;
+				s32 j;
 				s32 slotsdone[MAX_BOTS];
 				s32 chrnum = 0;
 				s32 maxsimulants;
@@ -2113,8 +2114,10 @@ void setupCreateProps(s32 stagenum)
 
 					if ((g_MpSetup.chrslots & (1 << (slotnum + 4)))
 							&& mpIsSimSlotEnabled(slotnum)) {
-						botmgrAllocateBot(chrnum, slotnum);
-						chrnum++;
+						for (j = 0; j < 2; j++) {
+							botmgrAllocateBot(chrnum, slotnum);
+							chrnum++;
+						}
 					}
 
 					slotsdone[slotnum] = true;

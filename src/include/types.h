@@ -2781,7 +2781,7 @@ struct player {
 	/*0x1be0*/ f32 cachedlookahead;
 	/*0x1be4*/ u16 lookaheadframe;
 	/*0x1be6*/ u8 numaibuddies;
-	/*0x1be7*/ u8 aibuddynums[MAX_BOTS];
+	/*0x1be7*/ u8 aibuddynums[MAX_RUNTIME_BOTS];
 	/*0x1bf0*/ bool bondexploding;
 	/*0x1bf4*/ s32 bondnextexplode; // lvframe60 of next explosion
 	/*0x1bf8*/ s32 bondcurexplode;  // Increases by 1 on each tick even when not exploding

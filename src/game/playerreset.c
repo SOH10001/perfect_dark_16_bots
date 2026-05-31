@@ -390,6 +390,12 @@ void playerReset(void)
 	} else {
 		if (g_Vars.mplayerisrunning) {
 			g_Vars.currentplayer->prop->chr->team = 1 << g_PlayerConfigsArray[g_Vars.currentplayerstats->mpindex].base.team;
+			printf("MAXBOTS DEBUG player spawn playernum=%d mpindex=%d configteam=%d runtimeteam=0x%x\\n",
+				g_Vars.currentplayernum,
+				g_Vars.currentplayerstats->mpindex,
+				g_PlayerConfigsArray[g_Vars.currentplayerstats->mpindex].base.team,
+				g_Vars.currentplayer->prop->chr->team);
+			fflush(stdout);
 		} else {
 			g_Vars.currentplayer->prop->chr->team = TEAM_ALLY;
 		}

@@ -38,7 +38,7 @@
 #define PICKUPCRITERIA_CRITICAL 1
 #define PICKUPCRITERIA_ANY      2
 
-struct chrdata *g_MpBotChrPtrs[MAX_BOTS];
+struct chrdata *g_MpBotChrPtrs[MAX_RUNTIME_BOTS];
 
 u8 g_BotCount = 0;
 

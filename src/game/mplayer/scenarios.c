@@ -530,6 +530,9 @@ void scenarioCreateMatchStartHudmsgs(void)
 void scenarioTick(void)
 {
 	if (g_Vars.normmplayerisrunning) {
+		// Mod/debug: something after match start is clearing Teams/One Hit Kills.
+		// Keep the max-bot test rules alive during the match.
+		g_MpSetup.options |= MPOPTION_ONEHITKILLS | MPOPTION_TEAMSENABLED | MPOPTION_DISPLAYTEAM;
 		if (g_Vars.lvframenum == 5) {
 			scenarioCreateMatchStartHudmsgs();
 		}

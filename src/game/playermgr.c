@@ -620,7 +620,7 @@ void playermgrAllocatePlayer(s32 index)
 
 	g_Vars.players[index]->numaibuddies = 0;
 
-	for (i = 0; i < MAX_BOTS; i++) {
+	for (i = 0; i < MAX_RUNTIME_BOTS; i++) {
 		g_Vars.players[index]->aibuddynums[i] = 0;
 	}
 
@@ -654,7 +654,8 @@ void playermgrCalculateAiBuddyNums(void)
 	s32 playercount = PLAYERCOUNT();
 
 	for (i = playercount; i < g_MpNumChrs; i++) {
-		if (g_MpAllChrConfigPtrs[i]->team == g_MpAllChrConfigPtrs[playernum]->team) {
+		if (g_MpAllChrConfigPtrs[i]->team == g_MpAllChrConfigPtrs[playernum]->team
+				&& g_Vars.players[playernum]->numaibuddies < ARRAYCOUNT(g_Vars.players[playernum]->aibuddynums)) {
 			g_Vars.players[playernum]->aibuddynums[g_Vars.players[playernum]->numaibuddies] = i;
 			g_Vars.players[playernum]->numaibuddies++;
 		}

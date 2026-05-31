@@ -15,11 +15,12 @@
 
 #define MAX_ARTIFACTS          120
 #define MAX_BOTS               8
+#define MAX_RUNTIME_BOTS       16
 #define MAX_CHRSPERSQUADRON    16
 #define MAX_CHRSPERTEAM        32
 #define MAX_CHRWAYPOINTS       6
 #define MAX_EYESPYDARTS        8
-#define MAX_MPCHRS             (MAX_PLAYERS + MAX_BOTS)
+#define MAX_MPCHRS             20
 #define MAX_MPPLAYERCONFIGS    (MAX_PLAYERS + 2)
 #define MAX_OBJECTIVES         10
 #define MAX_PLAYERS            4
