@@ -26,3 +26,7 @@ tools/mkrom/mkrom
 CppProperties.json
 .idea
 cmake-build-debug
+
+# Local macOS app bundle / installer artifacts
+Perfect Dark.app/
+SDL2.dmg
