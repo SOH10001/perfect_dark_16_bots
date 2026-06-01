@@ -3484,7 +3484,7 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 	{
 		MENUITEMTYPE_SELECTABLE,
 		8,
-		MENUITEMFLAG_LITERAL_TEXT,
+		MENUITEMFLAG_LITERAL_TEXT | MENUITEMFLAG_LABEL_HASRIGHTTEXT,
 		(uintptr_t)"9:",
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
@@ -3492,7 +3492,7 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 	{
 		MENUITEMTYPE_SELECTABLE,
 		9,
-		MENUITEMFLAG_LITERAL_TEXT,
+		MENUITEMFLAG_LITERAL_TEXT | MENUITEMFLAG_LABEL_HASRIGHTTEXT,
 		(uintptr_t)"10:",
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
@@ -3500,7 +3500,7 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 	{
 		MENUITEMTYPE_SELECTABLE,
 		10,
-		MENUITEMFLAG_LITERAL_TEXT,
+		MENUITEMFLAG_LITERAL_TEXT | MENUITEMFLAG_LABEL_HASRIGHTTEXT,
 		(uintptr_t)"11:",
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
@@ -3508,7 +3508,7 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 	{
 		MENUITEMTYPE_SELECTABLE,
 		11,
-		MENUITEMFLAG_LITERAL_TEXT,
+		MENUITEMFLAG_LITERAL_TEXT | MENUITEMFLAG_LABEL_HASRIGHTTEXT,
 		(uintptr_t)"12:",
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
