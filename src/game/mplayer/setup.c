@@ -3215,6 +3215,10 @@ MenuItemHandlerResult menuhandlerMpSimulantSlot(s32 operation, struct menuitem *
 		}
 		break;
 	case MENUOP_CHECKHIDDEN:
+		if (item->param >= MAX_BOT_CONFIGS) {
+			return true;
+		}
+
 		if (item->param >= 4 && !challengeIsFeatureUnlocked(MPFEATURE_8BOTS)) {
 			return true;
 		}
@@ -3241,14 +3245,7 @@ char *mpMenuTextSimulantName(struct menuitem *item)
 
 char *func0f17d3dc(struct menuitem *item)
 {
-	s32 index = item->param;
-
-	if (g_BotConfigsArray[index].base.name[0] == '\0'
-			|| ((g_MpSetup.chrslots & 1 << (index + 4)) == 0)) {
-		return "";
-	}
-
-	sprintf(g_StringPointer, "%d:\n", index + 1);
+	sprintf(g_StringPointer, "%d:\n", item->param + 1);
 	return g_StringPointer;
 }
 
@@ -3484,32 +3481,32 @@ struct menuitem g_MpSimulantsMenuItems[] = {
 	{
 		MENUITEMTYPE_SELECTABLE,
 		8,
-		MENUITEMFLAG_LITERAL_TEXT,
-		(uintptr_t)"9:",
+		0,
+		(uintptr_t)&func0f17d3dc,
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
 	},
 	{
 		MENUITEMTYPE_SELECTABLE,
 		9,
-		MENUITEMFLAG_LITERAL_TEXT,
-		(uintptr_t)"10:",
+		0,
+		(uintptr_t)&func0f17d3dc,
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
 	},
 	{
 		MENUITEMTYPE_SELECTABLE,
 		10,
-		MENUITEMFLAG_LITERAL_TEXT,
-		(uintptr_t)"11:",
+		0,
+		(uintptr_t)&func0f17d3dc,
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
 	},
 	{
 		MENUITEMTYPE_SELECTABLE,
 		11,
-		MENUITEMFLAG_LITERAL_TEXT,
-		(uintptr_t)"12:",
+		0,
+		(uintptr_t)&func0f17d3dc,
 		(uintptr_t)&mpMenuTextSimulantName,
 		menuhandlerMpSimulantSlot,
 	},
