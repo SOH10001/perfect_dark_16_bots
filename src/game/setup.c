@@ -37,6 +37,8 @@
 #include "data.h"
 #include "types.h"
 
+#define MP_BOT_SPAWN_MULTIPLIER 2
+
 s32 g_SetupCurMpLocation;
 
 struct tvscreen var80061a80 = {
@@ -2114,7 +2116,9 @@ void setupCreateProps(s32 stagenum)
 
 					if ((g_MpSetup.chrslots & (1 << (slotnum + 4)))
 							&& mpIsSimSlotEnabled(slotnum)) {
-						for (j = 0; j < 2; j++) {
+						for (j = 0; j < MP_BOT_SPAWN_MULTIPLIER
+								&& g_MpNumChrs < MAX_MPCHRS
+								&& g_BotCount < MAX_RUNTIME_BOTS; j++) {
 							botmgrAllocateBot(chrnum, slotnum);
 							chrnum++;
 						}
